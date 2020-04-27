@@ -115,7 +115,6 @@ def search():
 			rdict = dict()
 			rdict["class"] = cscr[0]
 			rdict["flavor"] = flavor_tot
-			rdict["rating"] = rating*5/2
 			rdict["match"] = round(rating*5,2)
 			rdict["social"] =socialrating[0]
 			rdict["rating"] = (rdict["match"]+rdict["social"])/2
