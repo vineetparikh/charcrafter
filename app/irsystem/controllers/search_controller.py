@@ -119,6 +119,6 @@ def search():
 			rdict["social"] =socialrating[0]
 			rdict["rating"] = (rdict["match"]+rdict["social"])/2
 			ret.append(rdict)
-
+		ret.sort(key = lambda x:x["rating"],reverse=True)
 		data = ret
 	return render_template('search.html', name=project_name, netid=net_id, output_message=output_message, data=data)
