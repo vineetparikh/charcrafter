@@ -34,16 +34,22 @@ def rank_doc_similarity_to_word(word_in, docs, dims):
 	return closest_projects_to_word(word_in, word_to_index)
 
 
-@irsystem.route('/', methods=['GET'])
+@irsystem.route('/', methods=['GET', 'POST'])
 def search():
 	query = request.args.get('search')
+	
 	if not query:
 		data = []
-		'test'
+		
 		output_message =[]
 
 
 	else:
+		if request.method == 'POST':
+			class_name = request.form['class']
+			rating= request.form['rating']
+			print(class_name)
+			print(rating)
 		query = query.lower()
 		output_message = query
 		p = 'app/data/classes.json'
@@ -101,7 +107,8 @@ def search():
 			sqlquery2=subclass
 			sqlquery3="')"
 			fullquery=sqlquery+sqlquery2+sqlquery3
-			socialrating = [r[0] for r in(db.engine.execute(fullquery))]
+			#socialrating = [r[0] for r in(db.engine.execute(fullquery))]
+			socialrating = []
 			if(len(socialrating)==0):
 				socialrating=[0]
 
