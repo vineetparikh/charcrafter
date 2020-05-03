@@ -117,7 +117,7 @@ def search():
 			rdict["flavor"] = flavor_tot
 			rdict["match"] = round(rating*5,2)
 			rdict["social"] =socialrating[0]
-			rdict["rating"] = (rdict["match"]+rdict["social"])/2
+			rdict["rating"] = rdict["match"]*.75+rdict["social"]*.25
 			ret.append(rdict)
 		ret.sort(key = lambda x:x["rating"],reverse=True)
 		data = ret
