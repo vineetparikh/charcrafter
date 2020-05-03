@@ -104,7 +104,6 @@ def search():
 			socialrating = [r[0] for r in(db.engine.execute(fullquery))]
 			if(len(socialrating)==0):
 				socialrating=[0]
-
 			flavor_tot = ""
 			for c in f["classes"]:
 				if c["class"]==base_class:
