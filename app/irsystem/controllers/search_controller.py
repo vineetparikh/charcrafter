@@ -34,16 +34,33 @@ def rank_doc_similarity_to_word(word_in, docs, dims):
 	return closest_projects_to_word(word_in, word_to_index)
 
 
-@irsystem.route('/', methods=['GET'])
+@irsystem.route('/', methods=['GET', 'POST'])
 def search():
 	query = request.args.get('search')
+	
 	if not query:
 		data = []
-		'test'
+		
 		output_message =[]
 
 
 	else:
+		if request.method == 'POST':
+			class_name = request.form['class']
+			subclass_name= class_name.split(":")[1]
+			rating= float(request.form['rating'])
+			q1="SELECT overallfreq,combinedrating FROM fullsubclassratings WHERE subclass IN ('"
+			q2=q1+subclass_name+"')"
+			freq= float([r[0] for r in(db.engine.execute(q2))][0])
+			combrating= float([r[1] for r in(db.engine.execute(q2))][0])
+			newfreq=freq+1
+			newrating = (freq*combrating + rating)/newfreq
+			q3="UPDATE fullsubclassratings SET overallfreq=" + str(newfreq) +" WHERE subclass IN('" +subclass_name + "')"
+			db.engine.execute(q3)
+			db.engine.execute("UPDATE fullsubclassratings SET combinedrating = "+ str(newrating) + " WHERE subclass IN('" + subclass_name +"')")
+
+
+			
 		query = query.lower()
 		output_message = query
 		p = 'app/data/classes.json'
