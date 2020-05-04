@@ -11,9 +11,17 @@
         <link rel="stylesheet" href="/static/bootstrap.min.css">
         <link rel="stylesheet" href="/static/main.css">
         <link href='https://fonts.googleapis.com/css?family=Almendra SC' rel='stylesheet'>
-        <script src="/static/jquery-3.4.1.min.js" type="text/javascript"></script>
-        <!--<script src="/static/stars-plus.js" type="text/javascript"></script>-->
+        <!--<script src="/static/jquery-3.4.1.min.js" type="text/javascript"></script>-->
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js?ver=1.4.2'></script>
+        <script src="/static/star-settings.js" type="text/javascript"></script>
         <title>Charcrafter</title>
+
+        <script type="text/javascript">
+          jQuery.noConflict();
+          jQuery(document).ready(function(){
+            jQuery('[data-toggle="tooltip"]').tooltip({placement: 'top'});   
+          });
+        </script>
     </head>
     <body>
         <div class="topcorner">
@@ -21,15 +29,16 @@
             <p>Student Name: ({{ netid }})</p>
         </div>
         <main>
-          <!--style="font-size: 55px; font-family: Impact, fantasy; color: #4285F4"-->
         <h1>CharCrafter</h1>
           <!--blurb-->
+          <div class="backing">
           <h3>Dungeons and Dragons (DnD 5th edition) is a fantasy game where players make characters 
             that go on adventures. Welcome to Character Crafter, an easy tool for 
             finding class and subclass builds for your character based on YOUR needs! </h3>
           <h3>A character's strengths and weaknesses are largely defined by their class.
             This tool searches for you with just a few keywords.
             For matches, describe the character you want to play in a few words.</h3>
+          </div>
         </main>
         <form class="form-inline global-search">
             <div class="form-group">
@@ -57,28 +66,28 @@
               <!--<p>{{d}}</p>-->
               <div class = "result">
                 <div class="score_breakdown">
-                  <h2>Social Score</h2>
-                  <h3>{{d["social"]}}/5</h3>
-                  <h2>Match Score</h2>
+                <div><h2>Match Score</h2><div class="tip"><p href="#" data-toggle="tooltip" title="Represents basic match between your search and the DnD handbook.">?</p></div></div>
                   <h3>{{d["match"]}}/5</h3>
+                <div><h2>Social Score</h2><div class="tip"><p href="#" data-toggle="tooltip" title="Represents popularity of this build. Better builds tend to be more popular">?</p></div></div>
+                  <h3>{{d["social"]}}/5</h3>
                 </div>
 
                 <div class="char">
                   <h2>{{d["class"]}}</h2>
                   <p>{{d["flavor"]}}</p>
-                  <!--this should be shorter, so even though it has less width, won't look like a block-->
                 </div>
 
                 <div class="ratings">
-                  <h2>Build Score</h2>
+                  <div><h2>Build Score</h2><div class="tip"><p href="#" data-toggle="tooltip" title="Overall score weighting both Match Score and Social Score">?</p></div></div>
                   <p>Score: {{d["rating"]|round(2)}} out of 5</p>
                   <h3>How was this result?</h3>
                   <div class="rates">
-                  <form method="post">
-                    <input class= "hidden" name= "class" value= "{{d['class']}}"></input>
-                    <input class= "rating" name= "rating" id= "star"></input>
-                    <input type="submit" value=""></input>
-                  </form>
+                    <form method="post">
+                      <input class= "hidden" name= "class" value= "{{d['class']}}"></input>
+                      <input type="number" id= "user-input" name= "rating" 
+                      class="rating" data-show-clear="false" data-show-caption="false"></input>
+                      <input type="submit" value="Rate" class="btn btn-info"></input>
+                    </form>
                   </div>
                 </div>
               </div>

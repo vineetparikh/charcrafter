@@ -127,3 +127,13 @@ h1{
 .star:hover{
   color: yellow;
 }
+
+.tip p{
+  margin-left: 3px;;
+  border-color: tan;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 2px;;
+  font-size: small;
+  padding: 5px;
+}

@@ -118,7 +118,8 @@ def search():
 			sqlquery2=subclass
 			sqlquery3="')"
 			fullquery=sqlquery+sqlquery2+sqlquery3
-			socialrating = [r[0] for r in(db.engine.execute(fullquery))]
+			#socialrating = [r[0] for r in(db.engine.execute(fullquery))]
+			socialrating = []
 			if(len(socialrating)==0):
 				socialrating=[0]
 
